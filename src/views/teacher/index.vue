@@ -34,11 +34,11 @@
       :before-close="unSubmit"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="form" label-width="80px" :rules="rules">
+      <el-form :model="form" ref="form" label-width="80px" :rules="rules">
         <el-form-item label="导师姓名" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="导师职称" prop="jobTitle">
+        <el-form-item label="导师职称" prop="job_title">
           <el-input v-model="form.job_title"></el-input>
         </el-form-item>
         <el-form-item label="导师作品" prop="work">
@@ -53,7 +53,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit(ruleForm)">提交</el-button>
+          <el-button type="primary" @click="onSubmit('form')">提交</el-button>
           <el-button @click="unSubmit">取消</el-button>
         </el-form-item>
       </el-form>
@@ -106,7 +106,7 @@ export default {
           // { required: true, message: "请输入活动名称", trigger: "blur" },
           // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
-        jobTitle: [
+        job_title: [
           { required: true, message: "请输入导师职称", trigger: "blur" },
         ],
         work: [{ required: true, message: "请输入导师作品", trigger: "blur" }],
@@ -169,35 +169,44 @@ export default {
         }
       });
       this.dialogVisible = false;
-
       this.teacherDataList = newDataList;
     },
 
     onSubmit(formName) {
-      if (this.isEdit) {
-        var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
-        newDataList = newDataList.map((item, index) => {
-          if (item.id == this.selectedDataId) {
-            item = this.form;
-            console.log(item);
-            return item;
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          if (this.isEdit) {
+            var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
+            newDataList = newDataList.map((item, index) => {
+              if (item.id == this.selectedDataId) {
+                item = this.form;
+                console.log(item);
+                return item;
+              } else {
+                return item;
+              }
+            });
+            this.teacherDataList = newDataList;
           } else {
-            return item;
+            this.teacherDataList.push(this.form);
+            this.form = {};
           }
-        });
-        console.log(newDataList);
-        this.teacherDataList = newDataList;
-      } else {
-        this.teacherDataList.push(this.form);
-        this.form = {};
-      }
-      this.isEdit = false;
-      this.dialogFormVisible = false;
+          this.isEdit = false;
+          this.dialogFormVisible = false;
+        } else {
+          return false;
+        }
+      });
     },
+    resetForm() {
+      this.$refs["form"].resetFields();
+    },
+
     unSubmit() {
       this.form = {};
       this.isEdit = false;
       this.dialogFormVisible = false;
+      this.resetForm();
     },
     showHtml(str) {
       return str
