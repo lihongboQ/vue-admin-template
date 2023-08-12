@@ -12,7 +12,7 @@
       </div>
       <div v-for="(item, index) in teacherDataList" :key="index" class="item">
         <div class="teacher-name">{{ item.name }}</div>
-        <div class="teacher-job-title">{{ item.job_title }}</div>
+        <div class="teacher-job-title">{{ item.jobTitle }}</div>
         <div class="teacher-work">
           {{ item.work }}
         </div>
@@ -38,8 +38,8 @@
         <el-form-item label="导师姓名" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="导师职称" prop="job_title">
-          <el-input v-model="form.job_title"></el-input>
+        <el-form-item label="导师职称" prop="jobTitle">
+          <el-input v-model="form.jobTitle"></el-input>
         </el-form-item>
         <el-form-item label="导师作品" prop="work">
           <el-input v-model="form.work"></el-input>
@@ -62,13 +62,17 @@
     <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
       <span>确定要删除该信息吗</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="unSubmit">取 消</el-button>
         <el-button type="primary" @click="deleteDate">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
+import { updateTeacherInfo } from "@/api/teacher";
+import { removeTeacher } from "@/api/teacher";
+import { addTeacher } from "@/api/teacher";
+import { getTeacherList } from "@/api/teacher";
 export default {
   components: {},
   props: {},
@@ -78,9 +82,7 @@ export default {
       let bigWord = strArr.every((item) => {
         return item.charCodeAt() >= 65 && item.charCodeAt() <= 95;
       });
-      console.log(bigWord);
       // var strCode = value.charCodeAt();
-      console.log(strArr);
       // var strChart = value.charCaodeAt();
       if (value == "") {
         callback(new Error("请输入导师姓名"));
@@ -95,7 +97,7 @@ export default {
     return {
       form: {
         name: "",
-        job_title: "",
+        jobTitle: "",
         work: "",
         detail: "",
       },
@@ -106,7 +108,7 @@ export default {
           // { required: true, message: "请输入活动名称", trigger: "blur" },
           // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
-        job_title: [
+        jobTitle: [
           { required: true, message: "请输入导师职称", trigger: "blur" },
         ],
         work: [{ required: true, message: "请输入导师作品", trigger: "blur" }],
@@ -117,51 +119,68 @@ export default {
       dialogVisible: false,
       dialogFormVisible: false,
       isEdit: false,
-      teacherDataList: [
-        {
-          id: 1,
-          name: "HUAN",
-          job_title: "音乐制作导师音乐制作导师",
-          work: "《》",
-          detail: `
-         2018雅加达亚运会闭幕式杭州六分钟》《奔跑吧》《王牌对王牌2018雅加达亚运会闭幕式杭州六分钟》
-          `,
-        },
-        {
-          id: 2,
-          name: "111",
-          job_title: "音乐制作导师音乐制作导师",
-          work: "《2018雅加达亚运会闭幕式杭州六分钟》《奔加达亚运会闭幕式杭州六分钟》《奔跑吧》《王牌对王牌》",
-          detail: `
-         2018雅加达亚运会闭幕式杭州六分钟》《奔跑吧牌对王牌2018雅加达亚运会闭幕式杭州六分钟》《奔跑吧》《王牌对王牌
-          `,
-        },
-        {
-          id: 3,
-          name: "aaa",
-          job_title: "音乐制作导师音乐制作导师",
-          work: "wff",
-          detail: `
-         2018雅加达亚运会闭幕式杭州六分钟》《奔跑吧牌对王牌2018雅加达亚运会闭幕式杭州六分钟》《奔跑吧》《王牌对王牌
-          `,
-        },
-      ],
+      teacherDataList: [],
       selectedDataId: null,
     };
   },
+  mounted() {
+    this.getTeacher();
+  },
   methods: {
+    getTeacher() {
+      getTeacherList()
+        .then((res) => {
+          if (res.code === 200) {
+            this.teacherDataList = res.data;
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
+        .catch(() => {
+          this.$message.error("网络错误");
+        });
+    },
+    addTeachers() {
+      addTeacher(this.form)
+        .then((res) => {
+          if (res.code === 200) {
+            this.$message.success("添加成功");
+            this.getTeacher();
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
+        .catch(() => {
+          this.$message.error("网络错误");
+        });
+    },
     editData(item) {
       this.form = JSON.parse(JSON.stringify(item));
-      this.selectedDataId = item.id;
+      // this.selectedDataId = item.id;
       this.isEdit = true;
       this.dialogFormVisible = true;
     },
 
     selectDeleteData(item) {
+      this.form = item;
       this.selectedDataId = item.id;
       this.dialogVisible = true;
     },
     deleteDate() {
+      removeTeacher(this.form)
+        .then((res) => {
+          if (res.code === 200) {
+            this.$message.success("删除成功");
+            this.getTeacher();
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
+        .catch(() => {
+          this.$message.error("网络错误");
+        });
+      // removeTeacher()
+
       var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
       this.teacherDataList.forEach((item, index) => {
         if (item.id == this.selectedDataId) {
@@ -176,23 +195,28 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.isEdit) {
-            var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
-            newDataList = newDataList.map((item, index) => {
-              if (item.id == this.selectedDataId) {
-                item = this.form;
-                console.log(item);
-                return item;
-              } else {
-                return item;
-              }
-            });
-            this.teacherDataList = newDataList;
-          } else {
-            this.teacherDataList.push(this.form);
+            updateTeacherInfo(this.form)
+              .then((res) => {
+                if (res.code === 200) {
+                  this.$message.success("更新成功");
+                  this.getTeacher();
+                } else {
+                  this.$message.error(res.msg);
+                }
+              })
+              .catch(() => {
+                this.$message.error("网络错误");
+              });
             this.form = {};
+            this.isEdit = false;
+            this.dialogFormVisible = false;
+          } else {
+            this.addTeachers();
+            this.form = {};
+            this.isEdit = false;
+            this.dialogFormVisible = false;
+            return;
           }
-          this.isEdit = false;
-          this.dialogFormVisible = false;
         } else {
           return false;
         }
@@ -204,6 +228,7 @@ export default {
 
     unSubmit() {
       this.form = {};
+      this.dialogVisible = false;
       this.isEdit = false;
       this.dialogFormVisible = false;
       this.resetForm();

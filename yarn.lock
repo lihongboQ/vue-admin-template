@@ -11414,11 +11414,7 @@
 
 "webpack@^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^2.0.0 || ^3.0.0 || ^4.0.0", "webpack@^3.0.0 || ^4.1.0 || ^5.0.0-0", "webpack@^4.0.0", "webpack@^4.0.0 || ^5.0.0", "webpack@^4.36.0 || ^5.0.0", "webpack@^4.4.0", "webpack@>=2", "webpack@>=2.0.0 <5.0.0", "webpack@>=4.0.0":
   "integrity" "sha512-6jJuJjg8znb/xRItk7bkT0+Q7AHCYjjFnvKIWQPkNIOyRqoCGvkOs0ipeQzrqz4l5FtN5ZI/ukEHroeX/o1/5Q=="
-<<<<<<< HEAD
-  "resolved" "https://registry.npmmirror.com/webpack/-/webpack-4.46.0.tgz"
-=======
   "resolved" "https://registry.npmjs.org/webpack/-/webpack-4.46.0.tgz"
->>>>>>> 8300312c6339532363a9d4029fd1ae7babb3e44c
   "version" "4.46.0"
   dependencies:
     "@webassemblyjs/ast" "1.9.0"
