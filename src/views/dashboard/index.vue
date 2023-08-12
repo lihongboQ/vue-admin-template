@@ -628,12 +628,13 @@
         />
       </div>
     </div>
-    <div style="width: 100%; margin-top: 16px; text-align: center;">
+    <div style="width: 100%; margin-top: 16px; text-align: center">
       <el-button size="medium" type="primary">保存</el-button>
     </div>
   </div>
 </template>
 <script>
+import { getCompanyInfo } from '@/api/company'
 import draggable from 'vuedraggable'
 export default {
   name: 'Dashboard',
@@ -695,6 +696,9 @@ export default {
         { value: 'Edgard', vip: false },
         { value: 'Johnson', vip: false }
       ],
+      dataFrom: {
+        // '111111111111111111111111'
+      },
       worksAddress: '',
       worksName: '',
       checked: false,
@@ -703,6 +707,9 @@ export default {
       directionType: ''
       // input: ''
     }
+  },
+  mounted() {
+    this.getCompanyInfos()
   },
   methods: {
     courseDelete(index) {
@@ -740,6 +747,12 @@ export default {
           this.directionType = index
         }
       }
+    },
+    getCompanyInfos() {
+      getCompanyInfo().then((res) => {
+        this.dataFrom = res
+        console.log('🚀 ~ file: index.vue:754 ~ getCompanyInfo ~ this.dataFrom:', this.dataFrom)
+      })
     }
   }
 }
