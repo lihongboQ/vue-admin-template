@@ -34,23 +34,23 @@
       :before-close="unSubmit"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="form" ref="form" label-width="80px" :rules="rules">
+      <el-form ref="form" :model="form" label-width="80px" :rules="rules">
         <el-form-item label="导师姓名" prop="name">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.name" />
         </el-form-item>
         <el-form-item label="导师职称" prop="jobTitle">
-          <el-input v-model="form.jobTitle"></el-input>
+          <el-input v-model="form.jobTitle" />
         </el-form-item>
         <el-form-item label="导师作品" prop="work">
-          <el-input v-model="form.work"></el-input>
+          <el-input v-model="form.work" />
         </el-form-item>
 
         <el-form-item label="导师详情" prop="detail">
           <el-input
+            v-model="form.detail"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 6 }"
-            v-model="form.detail"
-          ></el-input>
+          />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit('form')">提交</el-button>
@@ -78,8 +78,8 @@ export default {
   props: {},
   data() {
     var teacherNameRule = (rule, value, callback) => {
-      let strArr = value.split("");
-      let bigWord = strArr.every((item) => {
+      const strArr = value.split("");
+      const bigWord = strArr.every((item) => {
         return item.charCodeAt() >= 65 && item.charCodeAt() <= 95;
       });
       // var strCode = value.charCodeAt();
