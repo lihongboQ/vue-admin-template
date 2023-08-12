@@ -7,8 +7,7 @@
           style="float: right; padding: 3px 0"
           type="text"
           @click="dialogFormVisible = true"
-          >添加新导师</el-button
-        >
+        >添加新导师</el-button>
       </div>
       <div v-for="(item, index) in teacherDataList" :key="index" class="item">
         <div class="teacher-name">{{ item.name }}</div>
@@ -22,9 +21,10 @@
 
         <div class="controls">
           <el-button type="primary" @click="editData(item)">编辑</el-button>
-          <el-button type="danger" @click="selectDeleteData(item)"
-            >删除</el-button
-          >
+          <el-button
+            type="danger"
+            @click="selectDeleteData(item)"
+          >删除</el-button>
         </div>
       </div>
     </el-card>
@@ -34,23 +34,23 @@
       :before-close="unSubmit"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="form" ref="form" label-width="80px" :rules="rules">
+      <el-form ref="form" :model="form" label-width="80px" :rules="rules">
         <el-form-item label="导师姓名" prop="name">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.name" />
         </el-form-item>
         <el-form-item label="导师职称" prop="jobTitle">
-          <el-input v-model="form.jobTitle"></el-input>
+          <el-input v-model="form.jobTitle" />
         </el-form-item>
         <el-form-item label="导师作品" prop="work">
-          <el-input v-model="form.work"></el-input>
+          <el-input v-model="form.work" />
         </el-form-item>
 
         <el-form-item label="导师详情" prop="detail">
           <el-input
+            v-model="form.detail"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 6 }"
-            v-model="form.detail"
-          ></el-input>
+          />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit('form')">提交</el-button>
@@ -69,126 +69,126 @@
   </div>
 </template>
 <script>
-import { updateTeacherInfo } from "@/api/teacher";
-import { removeTeacher } from "@/api/teacher";
-import { addTeacher } from "@/api/teacher";
-import { getTeacherList } from "@/api/teacher";
+import { updateTeacherInfo } from '@/api/teacher'
+import { removeTeacher } from '@/api/teacher'
+import { addTeacher } from '@/api/teacher'
+import { getTeacherList } from '@/api/teacher'
 export default {
   components: {},
   props: {},
   data() {
     var teacherNameRule = (rule, value, callback) => {
-      let strArr = value.split("");
-      let bigWord = strArr.every((item) => {
-        return item.charCodeAt() >= 65 && item.charCodeAt() <= 95;
-      });
+      const strArr = value.split('')
+      const bigWord = strArr.every((item) => {
+        return item.charCodeAt() >= 65 && item.charCodeAt() <= 95
+      })
       // var strCode = value.charCodeAt();
       // var strChart = value.charCaodeAt();
-      if (value == "") {
-        callback(new Error("请输入导师姓名"));
+      if (value === '') {
+        callback(new Error('请输入导师姓名'))
       } else if (value.length > 5 || value.length < 3) {
-        callback(new Error("长度在 3 到 5 个字母"));
+        callback(new Error('长度在 3 到 5 个字母'))
       } else if (!bigWord) {
-        callback(new Error("请全部更改为大写字母"));
+        callback(new Error('请全部更改为大写字母'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       form: {
-        name: "",
-        jobTitle: "",
-        work: "",
-        detail: "",
+        name: '',
+        jobTitle: '',
+        work: '',
+        detail: ''
       },
 
       rules: {
         name: [
-          { required: true, validator: teacherNameRule, trigger: "blur" },
+          { required: true, validator: teacherNameRule, trigger: 'blur' }
           // { required: true, message: "请输入活动名称", trigger: "blur" },
           // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
         jobTitle: [
-          { required: true, message: "请输入导师职称", trigger: "blur" },
+          { required: true, message: '请输入导师职称', trigger: 'blur' }
         ],
-        work: [{ required: true, message: "请输入导师作品", trigger: "blur" }],
+        work: [{ required: true, message: '请输入导师作品', trigger: 'blur' }],
         detail: [
-          { required: true, message: "请输入导师详情", trigger: "blur" },
-        ],
+          { required: true, message: '请输入导师详情', trigger: 'blur' }
+        ]
       },
       dialogVisible: false,
       dialogFormVisible: false,
       isEdit: false,
       teacherDataList: [],
-      selectedDataId: null,
-    };
+      selectedDataId: null
+    }
   },
   mounted() {
-    this.getTeacher();
+    this.getTeacher()
   },
   methods: {
     getTeacher() {
       getTeacherList()
         .then((res) => {
           if (res.code === 200) {
-            this.teacherDataList = res.data;
+            this.teacherDataList = res.data
           } else {
-            this.$message.error(res.msg);
+            this.$message.error(res.msg)
           }
         })
         .catch(() => {
-          this.$message.error("网络错误");
-        });
+          this.$message.error('网络错误')
+        })
     },
     addTeachers() {
       addTeacher(this.form)
         .then((res) => {
           if (res.code === 200) {
-            this.$message.success("添加成功");
-            this.getTeacher();
+            this.$message.success('添加成功')
+            this.getTeacher()
           } else {
-            this.$message.error(res.msg);
+            this.$message.error(res.msg)
           }
         })
         .catch(() => {
-          this.$message.error("网络错误");
-        });
+          this.$message.error('网络错误')
+        })
     },
     editData(item) {
-      this.form = JSON.parse(JSON.stringify(item));
+      this.form = JSON.parse(JSON.stringify(item))
       // this.selectedDataId = item.id;
-      this.isEdit = true;
-      this.dialogFormVisible = true;
+      this.isEdit = true
+      this.dialogFormVisible = true
     },
 
     selectDeleteData(item) {
-      this.form = item;
-      this.selectedDataId = item.id;
-      this.dialogVisible = true;
+      this.form = item
+      this.selectedDataId = item.id
+      this.dialogVisible = true
     },
     deleteDate() {
       removeTeacher(this.form)
         .then((res) => {
           if (res.code === 200) {
-            this.$message.success("删除成功");
-            this.getTeacher();
+            this.$message.success('删除成功')
+            this.getTeacher()
           } else {
-            this.$message.error(res.msg);
+            this.$message.error(res.msg)
           }
         })
         .catch(() => {
-          this.$message.error("网络错误");
-        });
+          this.$message.error('网络错误')
+        })
       // removeTeacher()
 
-      var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
+      var newDataList = JSON.parse(JSON.stringify(this.teacherDataList))
       this.teacherDataList.forEach((item, index) => {
-        if (item.id == this.selectedDataId) {
-          newDataList.splice(index, 1);
+        if (item.id === this.selectedDataId) {
+          newDataList.splice(index, 1)
         }
-      });
-      this.dialogVisible = false;
-      this.teacherDataList = newDataList;
+      })
+      this.dialogVisible = false
+      this.teacherDataList = newDataList
     },
 
     onSubmit(formName) {
@@ -198,54 +198,54 @@ export default {
             updateTeacherInfo(this.form)
               .then((res) => {
                 if (res.code === 200) {
-                  this.$message.success("更新成功");
-                  this.getTeacher();
+                  this.$message.success('更新成功')
+                  this.getTeacher()
                 } else {
-                  this.$message.error(res.msg);
+                  this.$message.error(res.msg)
                 }
               })
               .catch(() => {
-                this.$message.error("网络错误");
-              });
-            this.form = {};
-            this.isEdit = false;
-            this.dialogFormVisible = false;
+                this.$message.error('网络错误')
+              })
+            this.form = {}
+            this.isEdit = false
+            this.dialogFormVisible = false
           } else {
-            this.addTeachers();
-            this.form = {};
-            this.isEdit = false;
-            this.dialogFormVisible = false;
-            return;
+            this.addTeachers()
+            this.form = {}
+            this.isEdit = false
+            this.dialogFormVisible = false
+            return
           }
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     resetForm() {
-      this.$refs["form"].resetFields();
+      this.$refs['form'].resetFields()
     },
 
     unSubmit() {
-      this.form = {};
-      this.dialogVisible = false;
-      this.isEdit = false;
-      this.dialogFormVisible = false;
-      this.resetForm();
+      this.form = {}
+      this.dialogVisible = false
+      this.isEdit = false
+      this.dialogFormVisible = false
+      this.resetForm()
     },
     showHtml(str) {
       return str
-        .replace(str ? /&(?!#?\w+;)/g : /&/g, "&amp;")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
+        .replace(str ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
         .replace(/&quot;/g, '"')
         .replace(/&#39;/g, "'")
-        .replace(/&amp;nbsp;/g, "\u3000")
-        .replace(/&amp;rdquo;/g, "\“")
-        .replace(/&amp;ldquo;/g, "\”");
-    },
-  },
-};
+        .replace(/&amp;nbsp;/g, '\u3000')
+        .replace(/&amp;rdquo;/g, '\“')
+        .replace(/&amp;ldquo;/g, '\”')
+    }
+  }
+}
 </script>
 <style scoped lang="scss">
 .item {
