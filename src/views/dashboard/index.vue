@@ -51,19 +51,18 @@
               v-model="element.value"
               type="text"
               @blur="modifyType(index, 'courseType')"
-            >
+            />
             <div>
               <el-checkbox class="checked">VIP</el-checkbox>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="courseDelete(index)"
-              >删除</el-button>
+              <el-button size="mini" type="danger" @click="courseDelete(index)"
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, 'courseType')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -84,19 +83,18 @@
               v-model="element.value"
               type="text"
               @blur="modifyType(index, 'serviceType')"
-            >
+            />
             <div>
               <el-checkbox class="checked">VIP</el-checkbox>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="serviceDelete(index)"
-              >删除</el-button>
+              <el-button size="mini" type="danger" @click="serviceDelete(index)"
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, 'serviceType')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -119,19 +117,21 @@
               v-model="element.value"
               type="text"
               @blur="modifyType(index, '')"
-            >
+            />
             <div>
               <el-checkbox class="checked">VIP</el-checkbox>
               <el-button
                 size="mini"
                 type="danger"
                 @click="directionDelete(index)"
-              >删除</el-button>
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, '')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -156,18 +156,20 @@
               v-model="element.value"
               type="text"
               @blur="modifyType(index, '')"
-            >
+            />
             <div>
               <el-button
                 size="mini"
                 type="danger"
                 @click="directionDelete(index)"
-              >删除</el-button>
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, '')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -192,7 +194,7 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             英文：
             <p v-if="serviceType !== index">{{ element.value }} {{ index }}</p>
             <input
@@ -200,18 +202,17 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             <div>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="serviceDelete(index)"
-              >删除</el-button>
+              <el-button size="mini" type="danger" @click="serviceDelete(index)"
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, 'serviceType')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -234,18 +235,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -267,18 +270,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -302,7 +307,7 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             英文：
             <p v-if="serviceType !== index">{{ element.value }} {{ index }}</p>
             <input
@@ -310,18 +315,17 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             <div>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="serviceDelete(index)"
-              >删除</el-button>
+              <el-button size="mini" type="danger" @click="serviceDelete(index)"
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, 'serviceType')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -344,18 +348,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -377,18 +383,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -412,7 +420,7 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             英文：
             <p v-if="serviceType !== index">{{ element.value }} {{ index }}</p>
             <input
@@ -420,18 +428,17 @@
               :id="'test' + index"
               v-model="element.value"
               type="text"
-            >
+            />
             <div>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="serviceDelete(index)"
-              >删除</el-button>
+              <el-button size="mini" type="danger" @click="serviceDelete(index)"
+                >删除</el-button
+              >
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, 'serviceType')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -454,18 +461,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -487,18 +496,20 @@
                   :id="'test' + index"
                   v-model="element.value"
                   type="text"
-                >
+                />
                 <div>
                   <el-button
                     size="mini"
                     type="danger"
                     @click="serviceDelete(index)"
-                  >删除</el-button>
+                    >删除</el-button
+                  >
                   <el-button
                     size="mini"
                     type="warning"
                     @click="modifyType(index, 'serviceType')"
-                  >修改</el-button>
+                    >修改</el-button
+                  >
                 </div>
               </div>
             </draggable>
@@ -525,13 +536,14 @@
               v-model="element.value"
               type="text"
               @blur="modifyType(index, '')"
-            >
+            />
             <div>
               <el-button
                 size="mini"
                 type="warning"
                 @click="modifyType(index, '')"
-              >修改</el-button>
+                >修改</el-button
+              >
             </div>
           </div>
         </draggable>
@@ -628,121 +640,131 @@
         />
       </div>
     </div>
-    <div style="width: 100%; margin-top: 16px; text-align: center;">
+    <div style="width: 100%; margin-top: 16px; text-align: center">
       <el-button size="medium" type="primary">保存</el-button>
     </div>
   </div>
 </template>
 <script>
-import draggable from 'vuedraggable'
+import { getCompanyInfo } from "@/api/company";
+import draggable from "vuedraggable";
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
-    draggable
+    draggable,
   },
   data() {
     return {
       slogan: [
-        '十万象限 是杭州首家拥有 十年音乐传媒行业经验的专业团队 由世界艺术名校海归艺术家导师及 独立音乐人联合创立',
-        '音乐艺术作品集教育 留学申请规划 以及 跨界艺术联动',
-        '以专业的教学专注的态度帮助每一位热爱音乐的学生拿到dream offer 开发艺术领域的无限可能性'
+        "十万象限 是杭州首家拥有 十年音乐传媒行业经验的专业团队 由世界艺术名校海归艺术家导师及 独立音乐人联合创立",
+        "音乐艺术作品集教育 留学申请规划 以及 跨界艺术联动",
+        "以专业的教学专注的态度帮助每一位热爱音乐的学生拿到dream offer 开发艺术领域的无限可能性",
       ],
       courseList: [
-        { value: 'John', vip: false },
-        { value: 'Joao', vip: false },
-        { value: 'Jean', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false },
-        { value: 'Gerard', vip: false }
+        { value: "John", vip: false },
+        { value: "Joao", vip: false },
+        { value: "Jean", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
+        { value: "Gerard", vip: false },
       ],
       modernMusicHotMajor: [
         {
-          chinese: '',
-          english: ''
-        }
+          chinese: "",
+          english: "",
+        },
       ],
       schoolRoll: [
-        '纽约大学史丹赫音乐学院',
-        '英国皇家音乐学院',
-        '音乐科技',
-        '多媒体视觉配乐',
-        '约翰霍普金斯大学皮博迪音乐学院',
-        '东京艺术大学',
-        '钢琴表演',
-        '声音设计',
-        '朱莉亚音乐学院',
-        '柏林艺术大学',
-        '电子音乐制作',
-        '庆熙大学',
-        '米兰威尔第音乐学院',
-        '歌剧声乐',
-        '古典器乐演奏',
-        '爱丁堡大学'
+        "纽约大学史丹赫音乐学院",
+        "英国皇家音乐学院",
+        "音乐科技",
+        "多媒体视觉配乐",
+        "约翰霍普金斯大学皮博迪音乐学院",
+        "东京艺术大学",
+        "钢琴表演",
+        "声音设计",
+        "朱莉亚音乐学院",
+        "柏林艺术大学",
+        "电子音乐制作",
+        "庆熙大学",
+        "米兰威尔第音乐学院",
+        "歌剧声乐",
+        "古典器乐演奏",
+        "爱丁堡大学",
       ],
       serviceList: [
-        { value: 'Juan', vip: false },
-        { value: 'Edgard', vip: false },
-        { value: 'Johnson', vip: false }
+        { value: "Juan", vip: false },
+        { value: "Edgard", vip: false },
+        { value: "Johnson", vip: false },
       ],
       directionList: [
-        { value: 'Juan', vip: false },
-        { value: 'Edgard', vip: false },
-        { value: 'Johnson', vip: false }
+        { value: "Juan", vip: false },
+        { value: "Edgard", vip: false },
+        { value: "Johnson", vip: false },
       ],
-      worksAddress: '',
-      worksName: '',
+      dataFrom: {},
+      worksAddress: "",
+      worksName: "",
       checked: false,
-      courseType: '',
-      serviceType: '',
-      directionType: ''
+      courseType: "",
+      serviceType: "",
+      directionType: "",
       // input: ''
-    }
+    };
+  },
+  mounted() {
+    this.getCompanyInfos();
   },
   methods: {
     courseDelete(index) {
-      this.courseList.splice(index, 1)
+      this.courseList.splice(index, 1);
     },
     serviceDelete(index) {
-      this.serviceList.splice(index, 1)
+      this.serviceList.splice(index, 1);
     },
     directionDelete(index) {
-      this.directionList.splice(index, 1)
+      this.directionList.splice(index, 1);
     },
     modifyType(index, type) {
-      if (type === 'serviceType') {
+      if (type === "serviceType") {
         if (index === this.serviceType) {
-          this.serviceType = ''
+          this.serviceType = "";
         } else {
-          this.serviceType = index
-          this.courseType = ''
-          this.directionType = ''
+          this.serviceType = index;
+          this.courseType = "";
+          this.directionType = "";
         }
-      } else if (type === 'courseType') {
+      } else if (type === "courseType") {
         if (index === this.courseType) {
-          this.courseType = ''
+          this.courseType = "";
         } else {
-          this.courseType = index
-          this.serviceType = ''
-          this.directionType = ''
+          this.courseType = index;
+          this.serviceType = "";
+          this.directionType = "";
         }
       } else {
         if (index === this.directionType) {
-          this.directionType = ''
+          this.directionType = "";
         } else {
-          this.courseType = ''
-          this.serviceType = ''
-          this.directionType = index
+          this.courseType = "";
+          this.serviceType = "";
+          this.directionType = index;
         }
       }
-    }
-  }
-}
+    },
+    getCompanyInfos() {
+      getCompanyInfo().then((res) => {
+        console.log(res);
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
