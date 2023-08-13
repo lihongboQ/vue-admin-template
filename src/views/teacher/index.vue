@@ -9,9 +9,20 @@
           @click="dialogFormVisible = true"
         >添加新导师</el-button>
       </div>
+
+      <!-- <div class="items">
+        <div class="teacher-name">导师姓名</div>
+        <div class="teacher-job-title">导师职称</div>
+        <div class="teacher-image">图片名称</div>
+        <div class="teacher-work">导师作品</div>
+        <div class="teacher-detail">导师详情</div>
+        <div class="controls">操作</div>
+      </div> -->
+
       <div v-for="(item, index) in teacherDataList" :key="index" class="item">
         <div class="teacher-name">{{ item.name }}</div>
         <div class="teacher-job-title">{{ item.jobTitle }}</div>
+        <div class="teacher-image">{{ item.image }}</div>
         <div class="teacher-work">
           {{ item.work }}
         </div>
@@ -40,6 +51,9 @@
         </el-form-item>
         <el-form-item label="导师职称" prop="jobTitle">
           <el-input v-model="form.jobTitle" />
+        </el-form-item>
+        <el-form-item label="图片名称" prop="image">
+          <el-input v-model="form.image" />
         </el-form-item>
         <el-form-item label="导师作品" prop="work">
           <el-input v-model="form.work" />
@@ -93,6 +107,7 @@ export default {
       } else {
         callback()
       }
+<<<<<<< HEAD
     }
     return {
       form: {
@@ -100,6 +115,33 @@ export default {
         jobTitle: '',
         work: '',
         detail: ''
+=======
+    };
+    var teacherImageRule = (rule, value, callback) => {
+      const strArr = value.split("");
+      const bigWord = strArr.every((item) => {
+        return item.charCodeAt() >= 65 && item.charCodeAt() <= 95;
+      });
+      // var strCode = value.charCodeAt();
+      // var strChart = value.charCaodeAt();
+      if (value == "") {
+        callback(new Error("请输入图片名称"));
+      } else if (value.length > 6 || value.length < 2) {
+        callback(new Error("长度在 2 到 6 个字母"));
+      } else if (!bigWord) {
+        callback(new Error("请全部更改为大写字母"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      form: {
+        name: "",
+        jobTitle: "",
+        work: "",
+        image: "",
+        detail: "",
+>>>>>>> 94933afe7d473800beca6b824e5d8c3dfe7e74ce
       },
 
       rules: {
@@ -108,6 +150,11 @@ export default {
           // { required: true, message: "请输入活动名称", trigger: "blur" },
           // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
+
+        image: [
+          { required: true, validator: teacherImageRule, trigger: "blur" },
+        ],
+
         jobTitle: [
           { required: true, message: '请输入导师职称', trigger: 'blur' }
         ],
@@ -170,8 +217,14 @@ export default {
       removeTeacher(this.form)
         .then((res) => {
           if (res.code === 200) {
+<<<<<<< HEAD
             this.$message.success('删除成功')
             this.getTeacher()
+=======
+            this.$message.success("删除成功");
+            this.getTeacher();
+            this.form = {};
+>>>>>>> 94933afe7d473800beca6b824e5d8c3dfe7e74ce
           } else {
             this.$message.error(res.msg)
           }
@@ -181,6 +234,7 @@ export default {
         })
       // removeTeacher()
 
+<<<<<<< HEAD
       var newDataList = JSON.parse(JSON.stringify(this.teacherDataList))
       this.teacherDataList.forEach((item, index) => {
         if (item.id === this.selectedDataId) {
@@ -189,6 +243,16 @@ export default {
       })
       this.dialogVisible = false
       this.teacherDataList = newDataList
+=======
+      // var newDataList = JSON.parse(JSON.stringify(this.teacherDataList));
+      // this.teacherDataList.forEach((item, index) => {
+      //   if (item.id == this.selectedDataId) {
+      //     newDataList.splice(index, 1);
+      //   }
+      // });
+      this.dialogVisible = false;
+      // this.teacherDataList = newDataList;
+>>>>>>> 94933afe7d473800beca6b824e5d8c3dfe7e74ce
     },
 
     onSubmit(formName) {
@@ -248,15 +312,47 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.items {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0px 10px;
+  border-bottom: 2px solid #eed4d4;
+  text-align: left;
+  .teacher-name {
+    width: 80px;
+    text-transform: uppercase;
+  }
+  .teacher-image {
+    width: 80px;
+    text-transform: uppercase;
+  }
+
+  .teacher-job-title {
+    width: 200px;
+  }
+
+  .teacher-work {
+    width: 300px;
+  }
+
+  .teacher-detail {
+    width: 400px;
+  }
+}
 .item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
   padding: 10px 0px 10px;
   border-bottom: 2px solid #eed4d4;
-
   .teacher-name {
+    width: 80px;
+    text-transform: uppercase;
+  }
+  .teacher-image {
     width: 80px;
     text-transform: uppercase;
   }
@@ -281,7 +377,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
 
