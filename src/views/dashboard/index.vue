@@ -830,7 +830,7 @@ export default {
             this.promotionalTitle = res.data.promotionalTitle
             this.promotionalUrl = res.data.promotionalUrl
             this.seniorStudyAbroadPlanner = res.data.seniorStudyAbroadPlanner
-            // this.slogan = JSON.parse(res.data.slogan)
+            this.slogan = JSON.parse(res.data.slogan)
             this.popularMajors.modernMusic.popularMajorsCn = JSON.parse(
               res.data.popularMajorsCn
             ).modernMusic

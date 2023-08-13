@@ -5,7 +5,7 @@ import 'nprogress/nprogress.css' // progress bar style
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 router.beforeEach((to, from, next) => {
-  const hasToken = localStorage.getItem("adminToken");
+  const hasToken = localStorage.getItem("adminToken")
   if (to.path === '/login') {
     next()
   } else {
@@ -17,7 +17,6 @@ router.beforeEach((to, from, next) => {
       })
     }
   }
-
 })
 //   next()
 //   return
