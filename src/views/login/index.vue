@@ -57,8 +57,8 @@
       >
       <div class="flex">
         <div class="tips">
-          <span style="margin-right: 20px">username: admin</span>
-          <span> password: any</span>
+          <!-- <span style="margin-right: 20px">username: admin</span>
+          <span> password: any</span> -->
         </div>
         <div>
           <!-- <el-button type="primary">注册</el-button> -->
