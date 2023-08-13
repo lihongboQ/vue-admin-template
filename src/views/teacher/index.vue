@@ -100,13 +100,13 @@ export default {
       // var strChart = value.charCaodeAt();
       if (value == "") {
         callback(new Error("请输入导师姓名"));
-      } else if (value.length > 5 || value.length < 3) {
-        callback(new Error("长度在 3 到 5 个字母"));
-      } else if (!bigWord) {
-        callback(new Error("请全部更改为大写字母"));
       } else {
         callback();
       }
+      //  else if (value.length > 6 || value.length < 2) {
+      //   callback(new Error("长度在 2到 6 个字母"));
+      // } else if (!bigWord) {
+      //   callback(new Error("请全部更改为大写字母"));
     };
     var teacherImageRule = (rule, value, callback) => {
       const strArr = value.split("");
