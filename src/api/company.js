@@ -11,6 +11,9 @@ export function updateCompanyInfo(data) {
   return request({
     url: '/company/update',
     method: 'post',
+    headers: {
+      ContentType: ' application/json'
+    },
     data
   })
 }
