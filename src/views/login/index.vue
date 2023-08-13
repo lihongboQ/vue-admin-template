@@ -70,7 +70,7 @@
 
 <script>
 import { validUsername } from "@/utils/validate";
-
+import { setToken } from "@/utils/auth";
 export default {
   name: "Login",
   data() {
@@ -91,7 +91,7 @@ export default {
     return {
       loginForm: {
         username: "admin",
-        password: "111111",
+        password: "",
       },
       loginRules: {
         username: [
@@ -128,19 +128,17 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
+          if (this.loginForm.password !== "admin123") {
+            this.$message.error("密码错误，请重新输入");
+            return;
+          }
+          if (this.loginForm.username !== "admin") {
+            this.$message.error("用户名错误，请重新输入");
+            return;
+          }
+          localStorage.setItem("adminToken", "hasToken");
+          setToken("hasToken");
           this.$router.push("/");
-          return;
-          this.loading = true;
-
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || "/" });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
         } else {
           console.log("error submit!!");
           return false;
